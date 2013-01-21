@@ -1,6 +1,6 @@
 package fr.bluepyth.scala.akr
 
-class PasswordGenerator(val fromPassword: Option[String], val minSize: Option[Int]) extends Iterator[Array[Char]] {
+class PasswordGenerator(val fromPassword: Option[String], val toPassword: Option[String], val minSize: Option[Int]) extends Iterator[Array[Char]] {
 
   val chars = Array[Char](
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
@@ -49,6 +49,6 @@ class PasswordGenerator(val fromPassword: Option[String], val minSize: Option[In
     indicesToPassword(currentPassword)
   }
 
-  def hasNext = true
+  def hasNext = toPassword.map { _ == currentPassword.toString }.getOrElse { true } 
 
 }

@@ -11,7 +11,8 @@ This bruteforce tool is very simple, yet efficient. It will try all password com
 There are currently two options:
 
 * `-l <minLength>` sets a minimum length for the password, if you know that it should have at least n characters (can save a lot of time)
-* `-s <fromPsswd>` sets the combination from which the brute force should start (useful to resume a brute force search)
+* `-f <fromPsswd>` sets the combination from which the brute force should start
+* `-t <toPasswd>` sets the last combination that sould be tested
 
 > Note: If you want to resume a stopped brute force, I suggest that you take the second last tried password that was stored in `$HOME/AndroidKeystoreRecovery.log`. Indeed, as actor computation is asynchronous, there is no guarantee that every password before the last one were _really_ tried by the software.
 
