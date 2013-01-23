@@ -17,67 +17,72 @@
  */
 package fr.bluepyth.scala.akr
 
-import java.io.InputStream
-import java.security.MessageDigest
-import java.io.DataInputStream
-import java.io.IOException
-import java.security.DigestInputStream
-import java.security.cert.Certificate
-import javax.crypto.EncryptedPrivateKeyInfo
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory
-import java.io.ByteArrayInputStream
 
-object JKSUtils {
-  def apply(in: InputStream, passwd: Array[Char]) = {
-    new JKSUtils(in, passwd)
-  }
-}
+import javax.crypto.EncryptedPrivateKeyInfo
+
 class JKSUtils(in: InputStream, passwd: Array[Char]) {
-  
   private val MAGIC = 0xFEEDFEED
+  var encoded = Array[Byte]()
+
   private val PRIVATE_KEY = 1
   private val TRUSTED_CERT = 2
 
-  val md = MessageDigest.getInstance("SHA")
-  md.update(listOfCharToArrayOfBytes(passwd))
-  md.update("Mighty Aphrodite".getBytes("UTF-8")) // HAR HAR
+  private val md = MessageDigest.getInstance("SHA")
+  md.update(charsToBytes(passwd))
+  md.update("Mighty Aphrodite".getBytes("UTF-8"))
 
   val din = new DataInputStream(new DigestInputStream(in, md))
+
   if (din.readInt != MAGIC) {
     throw new IOException("not a JavaKeyStore")
   }
+
   din.readInt // version no.
-  val n = din.readInt // Number of entries
+
+  val n = din.readInt
+
   if (n < 0) {
     throw new IOException("negative entry count")
   }
 
-  var encoded = Array[Byte]()
-  val digestType = din.readInt
-  val alias = din.readUTF // Skip Alias
-  din.readLong //Skip Date
-  digestType match {
+  val certType = din.readInt
+  din.readUTF
+  din.readLong // Skip Date
+
+  certType match {
     case PRIVATE_KEY =>
       val len = din.readInt
       encoded = new Array[Byte](len)
       din.read(encoded)
 
-      val count = din.readInt();
+      val count = din.readInt
 
-      val chain = new Array[Certificate](count)
-      for (j <- 0 until count)
-        chain(j) = readCert(din)
+      for {
+        j <- 0 until count
+      } yield {
+        readCert(din)
+      }
+
     case TRUSTED_CERT =>
-    case x =>
+    case _ =>
       throw new IOException("malformed key store")
   }
 
-  val encr = new EncryptedPrivateKeyInfo(encoded).getEncryptedData
-  val keystream = new Array[Byte](20)
-  System.arraycopy(encr, 0, keystream, 0, 20)
+  val encr = new EncryptedPrivateKeyInfo(encoded).getEncryptedData()
+
   val check = new Array[Byte](20)
-  System.arraycopy(encr, encr.length - 20, check, 0, 20)
-  val key = new Array[Byte](encr.length - 40)
+  Array.copy(encr, encr.length - 20, check, 0, 20)
+
   val sha = MessageDigest.getInstance("SHA1")
 
   val hash = new Array[Byte](20)
@@ -86,30 +91,37 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
   if (MessageDigest.isEqual(hash, md.digest())) {
     throw new IOException("signature not verified")
   }
-
+  
   def keyIsRight(password: Array[Char]): Boolean = {
     try {
-      decryptKey(listOfCharToArrayOfBytes(password));
+      decryptKey(charsToBytes(password))
     } catch {
-      case x => false
+      case e => false
     }
   }
 
-  private def listOfCharToArrayOfBytes(passwd: Array[Char]): Array[Byte] = {
+  private def charsToBytes(passwd: Array[Char]): Array[Byte] = {
+    val buf = new Array[Byte](passwd.length * 2)
 
-    val buf = new Array[Byte](passwd.size * 2)
-    for (i <- 0 until passwd.size by 2) {
-      buf(i) = (passwd(i) >>> 8).toByte
-      buf(i + 1) = passwd(i).toByte
+    var i = 0
+    var j = 0
+    while (i < passwd.length) {
+      buf(j) = (passwd(i) >>> 8).toByte; j += 1
+      buf(j) = passwd(i).toByte; j += 1
+      i += 1
     }
-    buf
 
+    buf
   }
 
   private def decryptKey(passwd: Array[Byte]): Boolean = {
     try {
-      System.arraycopy(encr, 0, keystream, 0, 20)
-      var count = 0
+      val key = new Array[Byte](encr.length - 40)
+      val keystream = new Array[Byte](20)
+      Array.copy(encr, 0, keystream, 0, 20)
+      println("S: " + keystream.mkString)
+
+      var count = 0;
 
       while (count < key.length) {
         sha.reset
@@ -117,11 +129,11 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
         sha.update(keystream)
         sha.digest(keystream, 0, keystream.length)
 
-        for(i <- 0 until keystream.length) {
-          if(count < key.length) {
-            key(count) = (keystream(i) ^ encr(count + 20)).toByte
-            count = count + 1
-          }
+        var i = 0
+        while (i < keystream.length && count < key.length) {
+          key(count) = (keystream(i) ^ encr(count + 20)).toByte
+          count += 1
+          i += 1
         }
       }
 
@@ -131,17 +143,17 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
 
       MessageDigest.isEqual(check, sha.digest)
     } catch {
-      case x: Exception => println(x); false
+      case e => println("exception"); false
     }
   }
 
   private def readCert(in: DataInputStream): Certificate = {
-    val inType = in.readUTF
+    val certType = in.readUTF
     val len = in.readInt
     val encoded = new Array[Byte](len)
     in.read(encoded)
 
-    val factory = CertificateFactory.getInstance(inType)
+    val factory = CertificateFactory.getInstance(certType)
 
     factory.generateCertificate(new ByteArrayInputStream(encoded))
   }

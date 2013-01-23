@@ -50,22 +50,23 @@ object App {
 
     println("Starting Brute force of keystore located at " + c.keystore.get)
 
-    val system = ActorSystem("bruteforce")
-
-    val loggerActor =
-      system.actorOf(Props[LoggerActor], "logger")
-
-    val smallestMailboxRouter =
-      system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors * 75)), "router")
-
-    val passwordGenerator = new PasswordGenerator(c.from, c.to, c.passwordLengthStart)
-
     val inJKSUtils = new FileInputStream(c.keystore.get)
-    JKSJavaUtils.engineLoad(inJKSUtils, new Array[Char](1))
+    implicit val jksUtils = new JKSUtils(inJKSUtils, new Array[Char](1))
     inJKSUtils.close
 
-    while (passwordGenerator.hasNext && !system.isTerminated)
+    val system = ActorSystem("bruteforce")
+
+    val loggerActor = system.actorOf(Props[LoggerActor], "logger")
+    
+    val smallestMailboxRouter =
+    system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors * 75)), "router")
+    
+    val passwordGenerator = new PasswordGenerator(c.from, c.to, c.passwordLengthStart)
+
+
+    while (passwordGenerator.hasNext && !system.isTerminated) {
       smallestMailboxRouter ! Password(passwordGenerator.next)
+    }
   }
 
 }
