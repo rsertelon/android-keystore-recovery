@@ -21,8 +21,10 @@ import scopt.immutable.OptionParser
 import fr.bluepyth.scala.akr.cli.AKRConfig
 import akka.actor.ActorSystem
 import akka.actor.Props
-import akka.routing.SmallestMailboxRouter
+import akka.routing._
 import java.io.FileInputStream
+import akka.util.duration._
+import akka.actor.PoisonPill
 
 /**
  * @author BluePyth
@@ -48,8 +50,6 @@ object App {
 
   def startBruteForce(c: AKRConfig) = {
 
-    println("Starting Brute force of keystore located at " + c.keystore.get)
-
     val inJKSUtils = new FileInputStream(c.keystore.get)
     implicit val jksUtils = new JKSUtils(inJKSUtils, new Array[Char](1))
     inJKSUtils.close
@@ -63,10 +63,17 @@ object App {
     
     val passwordGenerator = new PasswordGenerator(c.from, c.to, c.passwordLengthStart)
 
+    loggerActor ! StartingBruteForce("Starting Brute force of keystore located at " + c.keystore.get)
 
     while (passwordGenerator.hasNext && !system.isTerminated) {
       smallestMailboxRouter ! Password(passwordGenerator.next)
     }
+
+    smallestMailboxRouter ! Broadcast(PoisonPill)
+
+    while (!smallestMailboxRouter.isTerminated) {}
+
+    loggerActor ! PoisonPill
   }
 
 }

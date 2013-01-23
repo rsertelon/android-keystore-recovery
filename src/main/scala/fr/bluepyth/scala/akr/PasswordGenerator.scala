@@ -26,12 +26,12 @@ class PasswordGenerator(val fromPassword: Option[String], val toPassword: Option
     'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2',
     '3', '4', '5', '6', '7', '8', '9')
-  
+
   var firstPassGiven = false
-    
+
   var currentPassword: Array[Int] =
     fromPassword.map {
-      _.toCharArray.map { charToIndex(_) }
+      _.toCharArray.map { charToIndex }
     }.orElse {
       minSize.map { size =>
         (for (i <- 0 until size) yield 0).toArray
@@ -45,27 +45,27 @@ class PasswordGenerator(val fromPassword: Option[String], val toPassword: Option
   }
 
   def next: Array[Char] = {
-    if(firstPassGiven) {
-	    var hasIncremented = false
-	    var incNextChar = false
-	    for (i <- (0 until currentPassword.size).reverse) {
-	      if (!hasIncremented || incNextChar) {
-	        val curValue = currentPassword(i)
-	        val newValue = (currentPassword(i) + 1) % (chars.size)
-	        incNextChar = curValue > newValue
-	        currentPassword(i) = newValue
-	        hasIncremented = true
-	      }
-	      if(incNextChar && i == 0) {
-	        currentPassword = 0 +: currentPassword
-	      }
-	    }
+    if (firstPassGiven) {
+      var hasIncremented = false
+      var incNextChar = false
+      for (i <- (0 until currentPassword.size).reverse) {
+        if (!hasIncremented || incNextChar) {
+          val curValue = currentPassword(i)
+          val newValue = (currentPassword(i) + 1) % (chars.size)
+          incNextChar = curValue > newValue
+          currentPassword(i) = newValue
+          hasIncremented = true
+        }
+        if (incNextChar && i == 0) {
+          currentPassword = 0 +: currentPassword
+        }
+      }
     } else {
       firstPassGiven = true
     }
     indicesToPassword(currentPassword)
   }
 
-  def hasNext = toPassword.map { _ == currentPassword.toString }.getOrElse { true } 
+  def hasNext = toPassword.map { _ != indicesToPassword(currentPassword).mkString }.getOrElse { true }
 
 }

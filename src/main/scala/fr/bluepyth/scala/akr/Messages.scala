@@ -17,6 +17,10 @@
  */
 package fr.bluepyth.scala.akr
 
+import akka.actor.ActorRef
+
+case class StartingBruteForce(message: String)
+
 case class Password(p: Array[Char])
 
 case class PasswordFound(p: String)

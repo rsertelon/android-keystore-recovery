@@ -19,6 +19,7 @@ package fr.bluepyth.scala.akr
 
 import akka.actor.Actor
 import akka.actor.ActorLogging
+import akka.actor.PoisonPill
 
 class LoggerActor extends Actor with ActorLogging {
   
@@ -27,6 +28,8 @@ class LoggerActor extends Actor with ActorLogging {
 	var numberOfTriesSinceLastTick = 0
   
 	def receive = {
+	  case StartingBruteForce(message) =>
+	    log.info(message)
 	  case TriedPassword(p) => 
 	    if(System.nanoTime - lastTried < 30000000000L){
 	      numberOfTriesSinceLastTick = numberOfTriesSinceLastTick + 1
@@ -38,5 +41,10 @@ class LoggerActor extends Actor with ActorLogging {
 	  case PasswordFound(p) =>
 	    log.info("Password was found! It is : {}", p)
 	    context.system.shutdown
+	}
+	
+	override def postStop = {
+	  log.info("No password found, stopping application")
+	  context.system.shutdown
 	}
 }
