@@ -15,14 +15,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.bluepyth.scala.akr.actor
 
+import akka.actor.Actor
+import akka.actor.ActorLogging
 import akka.actor.ActorRef
+import akka.actor.actorRef2Scala
+import fr.bluepyth.scala.akr.jks.JKSUtils
+import fr.bluepyth.scala.akr.message._
 
-case class StartingBruteForce(message: String)
-
-case class Password(p: Array[Char])
-
-case class PasswordFound(p: String)
-
-case class TriedPassword(p: Array[Char])
+class TryPasswordActor(keystore: String, loggerActor: ActorRef)(implicit jksUtils: JKSUtils) extends Actor with ActorLogging {
+  def receive = {
+    case Password(x) =>
+      loggerActor ! (if(jksUtils.keyIsRight(x)) PasswordFound(x.mkString) else TriedPassword(x))
+  }
+}

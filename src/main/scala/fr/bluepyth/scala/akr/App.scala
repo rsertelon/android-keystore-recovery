@@ -17,14 +17,21 @@
  */
 package fr.bluepyth.scala.akr
 
-import scopt.immutable.OptionParser
-import fr.bluepyth.scala.akr.cli.AKRConfig
 import akka.actor.ActorSystem
+import akka.actor.PoisonPill
 import akka.actor.Props
 import akka.routing._
-import java.io.FileInputStream
 import akka.util.duration._
-import akka.actor.PoisonPill
+
+import java.io.FileInputStream
+
+import fr.bluepyth.scala.akr.cli.AKRConfig
+import fr.bluepyth.scala.akr.actor._
+import fr.bluepyth.scala.akr.jks.JKSUtils
+import fr.bluepyth.scala.akr.message._
+import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
+
+import scopt.immutable.OptionParser
 
 /**
  * @author BluePyth
@@ -61,7 +68,7 @@ object App {
     val smallestMailboxRouter =
     system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors * 75)), "router")
     
-    val passwordGenerator = new PasswordGenerator(c.from, c.to, c.passwordLengthStart)
+    val passwordGenerator = new SimplePasswordGenerator(c.from, c.to, c.passwordLengthStart)
 
     loggerActor ! StartingBruteForce("Starting Brute force of keystore located at " + c.keystore.get)
 

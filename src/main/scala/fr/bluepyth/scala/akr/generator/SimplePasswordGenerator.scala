@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.bluepyth.scala.akr.generator
 
-class PasswordGenerator(val fromPassword: Option[String], val toPassword: Option[String], val minSize: Option[Int]) extends Iterator[Array[Char]] {
+class SimplePasswordGenerator(val fromPassword: Option[String], val toPassword: Option[String], val minSize: Option[Int]) extends Iterator[Array[Char]] {
 
   val chars = Array[Char](
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',

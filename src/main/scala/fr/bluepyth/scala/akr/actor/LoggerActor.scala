@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.bluepyth.scala.akr.actor
 
 import akka.actor.Actor
 import akka.actor.ActorLogging
-import akka.actor.PoisonPill
+import fr.bluepyth.scala.akr.message._
 
 class LoggerActor extends Actor with ActorLogging {
   

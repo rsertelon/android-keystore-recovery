@@ -19,7 +19,7 @@
  * This work is based upon Casey Marshall's reverse engineering of JKS <rsdio@metastatic.org>
  * You can find the original work at http://metastatic.org/source/JKS.html
  */
-package fr.bluepyth.scala.akr
+package fr.bluepyth.scala.akr.jks
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
