@@ -40,7 +40,7 @@ object App {
 
   def main(args: Array[String]) {
 
-    val parser = new OptionParser[AKRConfig]("akr", "1.x") {
+    val parser = new OptionParser[AKRConfig]("akr", "1.0") {
       def options = Seq(
         opt("f", "from", "Starts brute force at given password") { (v: String, c: AKRConfig) => c.copy(from = Some(v)) },
         opt("t", "to", "brute force will stop at given password") { (v: String, c: AKRConfig) => c.copy(to = Some(v)) },

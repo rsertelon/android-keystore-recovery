@@ -127,6 +127,11 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>fr.bluepyth.scala.akr.App</mainClass>
+						</manifest>
+					</archive>
 				</configuration>
 				<executions>
 					<execution>
