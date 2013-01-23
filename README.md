@@ -4,8 +4,6 @@ This project aims to solve the "password forgotten" problem for (Android) develo
 
 ## Features
 
-> Note that it is still a development version, some fixes still need be done
-
 This bruteforce tool is very simple, yet efficient. It will try all password combinations matching `[A-Za-z0-9]+`, from the shortest password, up to the solution.
 
 There are currently three options:
