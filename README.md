@@ -8,7 +8,7 @@ This project aims to solve the "password forgotten" problem for (Android) develo
 
 This bruteforce tool is very simple, yet efficient. It will try all password combinations matching `[A-Za-z0-9]+`, from the shortest password, up to the solution.
 
-There are currently two options:
+There are currently three options:
 
 * `-l <minLength>` sets a minimum length for the password, if you know that it should have at least n characters (can save a lot of time)
 * `-f <fromPsswd>` sets the combination from which the brute force should start
@@ -18,9 +18,9 @@ There are currently two options:
 
 ## Usage
 
-1. Download the project tarball (link to come...)
+1. Download the [project jar](http://download.bluepyth.fr/releases/akr-1.0.0.jar)
 2. Extract it where you feel like
-3. Launch the bruteforce search thanks to this command : `java -jar android-keystore-recovery.jar <keystore> [opts]`
+3. Launch the bruteforce search thanks to this command : `java -jar akr-1.0.0.jar <keystore> [opts]`
 
 ## Technical Information
 
