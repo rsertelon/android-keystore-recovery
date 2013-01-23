@@ -87,7 +87,6 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
   val check = new Array[Byte](20)
   Array.copy(encr, encr.length - 20, check, 0, 20)
 
-  val sha = MessageDigest.getInstance("SHA1")
 
   val hash = new Array[Byte](20)
   din.read(hash)
@@ -124,6 +123,7 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
       val keystream = new Array[Byte](20)
       Array.copy(encr, 0, keystream, 0, 20)
 
+      val sha = MessageDigest.getInstance("SHA1")
       var count = 0;
 
       while (count < key.length) {
@@ -146,7 +146,7 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
 
       MessageDigest.isEqual(check, sha.digest)
     } catch {
-      case e => println("exception"); false
+      case e => println("exception " +e); false
     }
   }
 

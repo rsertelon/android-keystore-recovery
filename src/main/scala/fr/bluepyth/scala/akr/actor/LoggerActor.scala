@@ -22,29 +22,34 @@ import akka.actor.ActorLogging
 import fr.bluepyth.scala.akr.message._
 
 class LoggerActor extends Actor with ActorLogging {
-  
-	var lastTried = System.nanoTime
-	
-	var numberOfTriesSinceLastTick = 0
-  
-	def receive = {
-	  case StartingBruteForce(message) =>
-	    log.info(message)
-	  case TriedPassword(p) => 
-	    if(System.nanoTime - lastTried < 30000000000L){
-	      numberOfTriesSinceLastTick = numberOfTriesSinceLastTick + 1
-	    } else {
-	      log.info("Still searching at {} passwords/s... (last password: {})", numberOfTriesSinceLastTick / 30, p.mkString)
-	      lastTried = System.nanoTime
-	      numberOfTriesSinceLastTick = 0
-	    }
-	  case PasswordFound(p) =>
-	    log.info("Password was found! It is : {}", p)
-	    context.system.shutdown
-	}
-	
-	override def postStop = {
-	  log.info("No password found, stopping application")
-	  context.system.shutdown
-	}
+
+  var lastTried = System.nanoTime
+
+  var numberOfTriesSinceLastTick = 0
+
+  var passFound = false
+
+  def receive = {
+    case StartingBruteForce(message) =>
+      log.info(message)
+    case TriedPassword(p) =>
+      if (System.nanoTime - lastTried < 30000000000L) {
+        numberOfTriesSinceLastTick = numberOfTriesSinceLastTick + 1
+      } else {
+        log.info("Still searching at {} passwords/s... (last password: {})", numberOfTriesSinceLastTick / 30, p.mkString)
+        lastTried = System.nanoTime
+        numberOfTriesSinceLastTick = 0
+      }
+    case PasswordFound(p) =>
+      log.info("Password was found! It is : {}", p)
+      passFound = true
+      context.system.shutdown
+  }
+
+  override def postStop = {
+    if (!passFound) {
+      log.info("No password found, stopping application")
+    }
+    context.system.shutdown
+  }
 }
