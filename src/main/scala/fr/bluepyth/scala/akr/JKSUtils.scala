@@ -15,6 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+/**
+ * This work is based upon Casey Marshall's reverse engineering of JKS <rsdio@metastatic.org>
+ * You can find the original work at http://metastatic.org/source/JKS.html
+ */
 package fr.bluepyth.scala.akr
 
 import java.io.ByteArrayInputStream;
