@@ -17,15 +17,9 @@
  */
 package fr.bluepyth.scala.akr.jks
 
-import org.specs2.mutable.Specification
 import org.junit.runner.RunWith
+import org.specs2.mutable.Specification
 import org.specs2.runner.JUnitRunner
-import java.io.FileInputStream
-import java.io.File
-import java.security.MessageDigest
-import java.io.DataInputStream
-import java.security.DigestInputStream
-import java.security.cert.Certificate
 
 @RunWith(classOf[JUnitRunner])
 class JKSUtilsSpec extends Specification {

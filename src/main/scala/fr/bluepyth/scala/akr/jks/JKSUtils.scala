@@ -123,7 +123,6 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
       val key = new Array[Byte](encr.length - 40)
       val keystream = new Array[Byte](20)
       Array.copy(encr, 0, keystream, 0, 20)
-      println("S: " + keystream.mkString)
 
       var count = 0;
 
