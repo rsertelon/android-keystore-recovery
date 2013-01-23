@@ -49,7 +49,9 @@
 <li>
 <code>-l &lt;minLength&gt;</code> sets a minimum length for the password, if you know that it should have at least n characters (can save a lot of time)</li>
 <li>
-<code>-s &lt;fromPsswd&gt;</code> sets the combination from which the brute force should start (useful to resume a brute force search)</li>
+<code>-f &lt;fromPsswd&gt;</code> sets the combination from which the brute force should start</li>
+<li>
+<code>-t &lt;toPasswd&gt;</code> sets the last combination that should be tested</li>
 </ul><blockquote>
 <p>Note: If you want to resume a stopped brute force, I suggest that you take the second last tried password that was stored in <code>$HOME/AndroidKeystoreRecovery.log</code>. Indeed, as actor computation is asynchronous, there is no guarantee that every password before the last one were <em>really</em> tried by the software.</p>
 </blockquote>
