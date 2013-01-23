@@ -33,7 +33,7 @@ class SimplePasswordGenerator(val fromPassword: Option[String], val toPassword: 
     fromPassword.map {
       _.toCharArray.map { charToIndex }
     }.orElse {
-      minSize.map { size =>
+      minSize.filter(_ > 0).map { size =>
         (for (i <- 0 until size) yield 0).toArray
       }
     }.getOrElse { Array(0) }
