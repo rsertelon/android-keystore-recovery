@@ -16,8 +16,8 @@ There are currently three options:
 
 ## Usage
 
-1. Download the [project jar](http://download.bluepyth.fr/releases/akr-1.0.0.jar)
-2. Launch the bruteforce search thanks to this command : `java -jar akr-1.0.0.jar <keystore> [opts]`
+1. Download the [project jar](http://download.bluepyth.fr/releases/akr-1.0.1.jar)
+2. Launch the bruteforce search thanks to this command : `java -jar akr-1.0.1.jar <keystore> [opts]`
 
 ## Technical Information
 
