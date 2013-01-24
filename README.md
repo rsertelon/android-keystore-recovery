@@ -28,10 +28,10 @@ In our case, we try all the characters like so: `A, B, ..., Z, a, b, ..., Z, 0, 
 Depending on your hardware, AKR will try more or less passwords per second, this is a sample calculation with my own computer:
 
 ```
-- AKR velocity: 120 000 passwords/seconds
+- AKR velocity: v = 120 000 passwords/seconds
 - Number of combinations for a password of length n: 62^n
-- Number of combinations for a 6 characters password: 56 800 235 584 (that's already a lot!)
-- Time needed to try all these combinations: 56 800 235 584 / 120 000 = 473 335s = 7 888mn = 131h = 5.5 days!
+- Number of combinations for a 6 characters password: 56 800 235 584
+- Time needed to try all these combinations: 56 800 235 584 / v = 5.5 days!
 - Time needed for 7 character passwords: 5.5 * 62 = 339 days!
 ```
 
