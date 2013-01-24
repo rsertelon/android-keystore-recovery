@@ -21,7 +21,7 @@ There are currently three options:
 
 ## Time needed to retrieve password
 
-Bruteforce algorithm are not optimized at all, AKR is faster than other bruteforce tools but it will still try __all__ password possibilities.
+Bruteforce algorithms are not optimized at all, AKR is faster than other bruteforce tools but it will still try __all__ password possibilities.
 
 In our case, we try all the characters like so: `A, B, ..., Z, a, b, ..., Z, 0, ..., 9`. This is 62 possibilites for one character of the password.
 
