@@ -16,7 +16,7 @@ There are currently three options:
 
 ## Usage
 
-1. Download the [project jar](http://download.bluepyth.fr/releases/akr-1.0.1.jar)
+1. Download the [project jar](http://download.bluepyth.fr/releases/)
 2. Launch the bruteforce: `java -jar akr-1.0.1.jar <keystore> [opts]`
 
 ## Time needed to retrieve password
