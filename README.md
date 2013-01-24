@@ -17,7 +17,27 @@ There are currently three options:
 ## Usage
 
 1. Download the [project jar](http://download.bluepyth.fr/releases/akr-1.0.1.jar)
-2. Launch the bruteforce search thanks to this command : `java -jar akr-1.0.1.jar <keystore> [opts]`
+2. Launch the bruteforce: `java -jar akr-1.0.1.jar <keystore> [opts]`
+
+## Time needed to retrieve password
+
+Bruteforce algorithm are not optimized at all, AKR is faster than other bruteforce tools but it will still try __all__ password possibilities.
+
+In our case, we try all the characters like so: `A, B, ..., Z, a, b, ..., Z, 0, ..., 9`. This is 62 possibilites for one character of the password.
+
+Depending on your hardware, AKR will try more or less passwords per second, this is a sample calculation with my own computer:
+
+```
+- AKR velocity: 120 000 passwords/seconds
+- Number of combinations for a password of length n: 62^n
+- Number of combinations for a 6 characters password: 56 800 235 584 (that's already a lot!)
+- Time needed to try all these combinations: 56 800 235 584 / 120 000 = 473 335s = 7 888mn = 131h = 5.5 days!
+- Time needed for 7 character passwords: 5.5 * 62 = 339 days!
+```
+
+As you can see, brute force with a single computer can take a very long time...
+
+You can use the `-f (--from)` and `-t (--to)` options to run AKR on different computers, to parallelize computation and try to shorten the discovery of the password.
 
 ## Technical Information
 
