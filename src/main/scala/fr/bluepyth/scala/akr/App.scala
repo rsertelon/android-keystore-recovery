@@ -44,7 +44,12 @@ object App {
       def options = Seq(
         opt("f", "from", "Starts brute force at given password") { (v: String, c: AKRConfig) => c.copy(from = Some(v)) },
         opt("t", "to", "brute force will stop at given password") { (v: String, c: AKRConfig) => c.copy(to = Some(v)) },
-        intOpt("l", "min-length", "Starts brute force with a password of given length") { (v: Int, c: AKRConfig) => c.copy(passwordLengthStart = Some(v)) },
+        intOpt("l", "min-length", "Starts brute force with a password of given length") { (v: Int, c: AKRConfig) => c.copy(minLength = Some(v)) },
+        flag("lo", "letters-only", "Tries passwords with letters only") { (c: AKRConfig) => c.copy(lettersOnly = true)},
+        flag("no", "numbers-only", "Tries passwords with numbers only") { (c: AKRConfig) => c.copy(numbersOnly = true)},
+        flag("lc", "lower-case", "Tries passwords without upper-case letters") { (c: AKRConfig) => c.copy(lowerCase = true)},
+        flag("uc", "upper-case", "Tries passwords without lower-case letters") { (c: AKRConfig) => c.copy(upperCase = true)},
+        opt("ec", "extra-characters", "Tries passwords with all characters with these extra characters") { (v:String, c: AKRConfig) => c.copy(extraCharacters = Some(v))},
         arg("keystore", "The keystore that will be bruteforced") { (v: String, c: AKRConfig) => c.copy(keystore = Some(v)) })
     }
 
@@ -68,7 +73,7 @@ object App {
     val smallestMailboxRouter =
     system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors * 75)), "router")
     
-    val passwordGenerator = new SimplePasswordGenerator(c.from, c.to, c.passwordLengthStart)
+    val passwordGenerator = new SimplePasswordGenerator(c)
 
     loggerActor ! StartingBruteForce("Starting Brute force of keystore located at " + c.keystore.get)
 

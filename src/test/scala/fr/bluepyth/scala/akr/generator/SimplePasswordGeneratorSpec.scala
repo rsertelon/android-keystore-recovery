@@ -20,16 +20,21 @@ package fr.bluepyth.scala.akr.generator
 import org.specs2.mutable.Specification
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
+import fr.bluepyth.scala.akr.cli.AKRConfig
 
 @RunWith(classOf[JUnitRunner])
 class SimplePasswordGeneratorSpec extends Specification {
 	"hasNext" should {
 	  "be true if no 'to' is defined and 'from' is defined" in {
-	    val gen = new SimplePasswordGenerator(Some("A"), None, None)
+	    val config = AKRConfig(from = Some("A"))
+	    
+	    val gen = new SimplePasswordGenerator(config)
 	    gen.hasNext must beTrue
 	  }
 	  "be false when 'to' is reached" in {
-	    val gen = new SimplePasswordGenerator(Some("A"), Some("B"), None)
+	    val config = AKRConfig(from = Some("A"), to = Some("B"))
+	    
+	    val gen = new SimplePasswordGenerator(config)
 	    gen.next // Got A
 	    gen.next // Got B
 	    gen.hasNext must beFalse
@@ -38,29 +43,29 @@ class SimplePasswordGeneratorSpec extends Specification {
 	
 	"next" should {
 	  "return Array('A') if no option is set" in {
-	    val gen = new SimplePasswordGenerator(None, None, None)
+	    val gen = new SimplePasswordGenerator(AKRConfig())
 	    gen.next must beEqualTo(Array('A'))
 	  }
 	  
 	  "return Array('A') if min length is zero" in {
-	    val gen = new SimplePasswordGenerator(None, None, Some(0))
+	    val gen = new SimplePasswordGenerator(AKRConfig(minLength = Some(0)))
 	    gen.next must beEqualTo(Array('A'))
 	  }
 	  
 	  "return Array('A', ...) of length 'min length'" in {
-	    val gen = new SimplePasswordGenerator(None, None, Some(4))
+	    val gen = new SimplePasswordGenerator(AKRConfig(minLength = Some(4)))
 	    val p = gen.next
 	    p.size must beEqualTo(4)
 	    p must beEqualTo(Array('A', 'A', 'A', 'A'))
 	  }
 	  
 	  "return Array('A', 'B', 'C') if from password is 'ABC'" in {
-	    val gen = new SimplePasswordGenerator(Some("ABC"), None, None)
+	    val gen = new SimplePasswordGenerator(AKRConfig(from = Some("ABC")))
 	    gen.next must beEqualTo(Array('A', 'B', 'C'))
 	  }
 	  
 	  "return Array('A', 'B', 'C') if from password is 'ABC' and min length is set" in {
-	    val gen = new SimplePasswordGenerator(Some("ABC"), None, Some(6))
+	    val gen = new SimplePasswordGenerator(AKRConfig(from = Some("ABC"), minLength = Some(6)))
 	    val p = gen.next
 	    p.size must beEqualTo(3)
 	    p must beEqualTo(Array('A', 'B', 'C'))

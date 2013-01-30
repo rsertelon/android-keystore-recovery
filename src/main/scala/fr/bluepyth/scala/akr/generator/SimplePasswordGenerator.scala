@@ -17,23 +17,42 @@
  */
 package fr.bluepyth.scala.akr.generator
 
-class SimplePasswordGenerator(val fromPassword: Option[String], val toPassword: Option[String], val minSize: Option[Int]) extends Iterator[Array[Char]] {
+import fr.bluepyth.scala.akr.cli.AKRConfig
 
-  val chars = Array[Char](
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
-    'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-    'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g',
-    'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-    's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2',
-    '3', '4', '5', '6', '7', '8', '9')
+class SimplePasswordGenerator(c: AKRConfig) {
+
+  val upperCaseLetters = Array[Char](
+	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+	'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+	'W', 'X', 'Y', 'Z')
+
+  val lowerCaseLetters = Array[Char](
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+    'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 
+    'w', 'x', 'y', 'z')
+    
+  val numbers = Array[Char]('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+  
+  
+  val letters = (if(!c.lowerCase) upperCaseLetters else Array[Char]()) ++ 
+  				(if (!c.upperCase) lowerCaseLetters else Array[Char]())
+  
+  val chars: Array[Char] = 
+    (if(c.lettersOnly)
+      letters
+    else if (c.numbersOnly)
+      numbers
+    else
+        letters ++ numbers) ++ c.extraCharacters.map { ec => ec.toCharArray }.getOrElse(Array())
+  
 
   var firstPassGiven = false
 
   var currentPassword: Array[Int] =
-    fromPassword.map {
+    c.from.map {
       _.toCharArray.map { charToIndex }
     }.orElse {
-      minSize.filter(_ > 0).map { size =>
+      c.minLength.filter(_ > 0).map { size =>
         (for (i <- 0 until size) yield 0).toArray
       }
     }.getOrElse { Array(0) }
@@ -66,6 +85,6 @@ class SimplePasswordGenerator(val fromPassword: Option[String], val toPassword: 
     indicesToPassword(currentPassword)
   }
 
-  def hasNext = toPassword.map { _ != indicesToPassword(currentPassword).mkString }.getOrElse { true }
+  def hasNext = c.to.map { _ != indicesToPassword(currentPassword).mkString }.getOrElse { true }
 
 }
