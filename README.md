@@ -1,23 +1,37 @@
+> Note that this README is updated for the latest snapshot version. If you want to use the last release, please visit [this page](http://bluepyth.github.com/android-keystore-recovery)
+
 ## Android Keystore Recovery
 
 This project aims to solve the "password forgotten" problem for (Android) developers who happen to manage java keystore(s).
 
-## Features
+## Usage
 
-This bruteforce tool is very simple, yet efficient. It will try all password combinations matching `[A-Za-z0-9]+`, from the shortest password, up to the solution.
+This bruteforce tool is very simple, yet efficient. It will try all password combinations matching `[A-Za-z0-9]+` by default, from the shortest password, up to the solution.
 
-There are currently three options:
+1. Download the [project jar](http://download.bluepyth.fr/releases/)
+2. Launch the bruteforce: `java -jar akr-1.1.0.jar <keystore> [opts]`
 
-* `-l <minLength>` sets a minimum length for the password, if you know that it should have at least n characters (can save a lot of time)
-* `-f <fromPsswd>` sets the combination from which the brute force should start
-* `-t <toPasswd>` sets the last combination that sould be tested
+## Options
+
+These are the available options for AKR:
+
+### Generic options
+
+* `-l <length>   | --min-length <length>` start at given length
+* `-f <password> | --from <password>` start at given password
+* `-t <password> | --to <password>` stop at given password
+
+You can use `--from` and `--to` to parallelize the brute force on several computers.
 
 > Note: If you want to resume a stopped brute force, I suggest that you take the second last tried password that was stored in `$HOME/AndroidKeystoreRecovery.log`. Indeed, as actor computation is asynchronous, there is no guarantee that every password before the last one were _really_ tried by the software.
 
-## Usage
+### Character set options &mdash; since 1.1
 
-1. Download the [project jar](http://download.bluepyth.fr/releases/)
-2. Launch the bruteforce: `java -jar akr-1.0.1.jar <keystore> [opts]`
+* `-lo         | --letters-onlỳ use letters only
+* `-no         | --numbers-onlỳ use numbers only
+* `-uc         | --upper-casè discards lower-case letters
+* `-lc         | --lower-case` discards upper-case letters
+* `-ec <chars> | --extra-characters <chars>` add specified characters in combinations
 
 ## Time needed to retrieve password
 

@@ -40,16 +40,16 @@ object App {
 
   def main(args: Array[String]) {
 
-    val parser = new OptionParser[AKRConfig]("akr", "1.0") {
+    val parser = new OptionParser[AKRConfig]("AKR", "1.1.0") {
       def options = Seq(
-        opt("f", "from", "Starts brute force at given password") { (v: String, c: AKRConfig) => c.copy(from = Some(v)) },
-        opt("t", "to", "brute force will stop at given password") { (v: String, c: AKRConfig) => c.copy(to = Some(v)) },
-        intOpt("l", "min-length", "Starts brute force with a password of given length") { (v: Int, c: AKRConfig) => c.copy(minLength = Some(v)) },
-        flag("lo", "letters-only", "Tries passwords with letters only") { (c: AKRConfig) => c.copy(lettersOnly = true)},
-        flag("no", "numbers-only", "Tries passwords with numbers only") { (c: AKRConfig) => c.copy(numbersOnly = true)},
-        flag("lc", "lower-case", "Tries passwords without upper-case letters") { (c: AKRConfig) => c.copy(lowerCase = true)},
-        flag("uc", "upper-case", "Tries passwords without lower-case letters") { (c: AKRConfig) => c.copy(upperCase = true)},
-        opt("ec", "extra-characters", "Tries passwords with all characters with these extra characters") { (v:String, c: AKRConfig) => c.copy(extraCharacters = Some(v))},
+        intOpt("l", "min-length", "start at given length") { (v: Int, c: AKRConfig) => c.copy(minLength = Some(v)) },
+        opt("f", "from", "start at given password") { (v: String, c: AKRConfig) => c.copy(from = Some(v)) },
+        opt("t", "to", "stop at given password") { (v: String, c: AKRConfig) => c.copy(to = Some(v)) },
+        flag("lo", "letters-only", "use letters only") { (c: AKRConfig) => c.copy(lettersOnly = true)},
+        flag("no", "numbers-only", "use numbers only") { (c: AKRConfig) => c.copy(numbersOnly = true)},
+        flag("lc", "lower-case", "discards upper-case letters") { (c: AKRConfig) => c.copy(lowerCase = true)},
+        flag("uc", "upper-case", "discards lower -case letters") { (c: AKRConfig) => c.copy(upperCase = true)},
+        opt("ec", "extra-characters", "add specified characters in combinations") { (v:String, c: AKRConfig) => c.copy(extraCharacters = Some(v))},
         arg("keystore", "The keystore that will be bruteforced") { (v: String, c: AKRConfig) => c.copy(keystore = Some(v)) })
     }
 
