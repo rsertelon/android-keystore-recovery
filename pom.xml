@@ -101,9 +101,9 @@
 						</goals>
 						<configuration>
 							<args>
-								<arg>-make:transitive</arg>
 								<arg>-dependencyfile</arg>
 								<arg>${project.build.directory}/.scala_dependencies</arg>
+								<arg>-deprecation</arg>
 							</args>
 						</configuration>
 					</execution>
@@ -124,9 +124,10 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
+					<finalName>akr</finalName>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly-descriptor.xml</descriptor>
+					</descriptors>
 					<archive>
 						<manifest>
 							<mainClass>fr.bluepyth.scala.akr.App</mainClass>
@@ -146,6 +147,7 @@
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
+				<version>1.10.b1</version>
 				<configuration>
 					<header>src/etc/header.txt</header>
 					<excludes>
