@@ -17,9 +17,7 @@
  */
 package fr.bluepyth.scala.akr
 
-import akka.actor.ActorSystem
-import akka.actor.PoisonPill
-import akka.actor.Props
+import akka.actor._
 import akka.routing._
 import scala.concurrent.duration._
 
@@ -43,6 +41,7 @@ object App {
     val parser = new OptionParser[AKRConfig]("AKR", "1.1.0") {
       def options = Seq(
         intOpt("l", "min-length", "start at given length") { (v: Int, c: AKRConfig) => c.copy(minLength = Some(v)) },
+        intOpt("mps", "messages-per-second", "number of messages per second (for throttling)") { (v: Int, c: AKRConfig) => c.copy(messagesPerSecond = Some(v))},
         opt("f", "from", "start at given password") { (v: String, c: AKRConfig) => c.copy(from = Some(v)) },
         opt("t", "to", "stop at given password") { (v: String, c: AKRConfig) => c.copy(to = Some(v)) },
         flag("lo", "letters-only", "use letters only") { (c: AKRConfig) => c.copy(lettersOnly = true)},
@@ -71,7 +70,7 @@ object App {
     val loggerActor = system.actorOf(Props[LoggerActor], "logger")
     
     val smallestMailboxRouter =
-    system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors)), "router")
+    	system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors)), "router")
     
     val passwordGenerator = new SimplePasswordGenerator(c)
 
@@ -79,6 +78,11 @@ object App {
 
     while (passwordGenerator.hasNext && !system.isTerminated) {
 	  smallestMailboxRouter ! Password(passwordGenerator.next)
+	  
+	  // I know this is dirty, but it does the job quite well
+	  c.messagesPerSecond.map { mps =>
+	    Thread.sleep(1000 / mps)
+	  }
     }
 
     smallestMailboxRouter ! Broadcast(PoisonPill)
