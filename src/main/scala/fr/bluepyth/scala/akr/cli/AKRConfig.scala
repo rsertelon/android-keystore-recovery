@@ -25,6 +25,6 @@ case class AKRConfig(
     numbersOnly: Boolean = false,
     upperCase: Boolean = false,
     lowerCase: Boolean = false,
-    messagesPerSecond: Option[Int] = None,
+    passwordsPerSecond: Option[Int] = None,
     extraCharacters: Option[String] = None,
     keystore: Option[String] = None)

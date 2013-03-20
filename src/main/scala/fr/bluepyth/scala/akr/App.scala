@@ -41,7 +41,7 @@ object App {
     val parser = new OptionParser[AKRConfig]("AKR", "1.1.0") {
       def options = Seq(
         intOpt("l", "min-length", "start at given length") { (v: Int, c: AKRConfig) => c.copy(minLength = Some(v)) },
-        intOpt("mps", "messages-per-second", "number of messages per second (for throttling)") { (v: Int, c: AKRConfig) => c.copy(messagesPerSecond = Some(v))},
+        intOpt("pps", "passwords-per-second", "number of passwords tested per second (for throttling)") { (v: Int, c: AKRConfig) => c.copy(passwordsPerSecond = Some(v))},
         opt("f", "from", "start at given password") { (v: String, c: AKRConfig) => c.copy(from = Some(v)) },
         opt("t", "to", "stop at given password") { (v: String, c: AKRConfig) => c.copy(to = Some(v)) },
         flag("lo", "letters-only", "use letters only") { (c: AKRConfig) => c.copy(lettersOnly = true)},
@@ -80,7 +80,7 @@ object App {
 	  smallestMailboxRouter ! Password(passwordGenerator.next)
 	  
 	  // I know this is dirty, but it does the job quite well
-	  c.messagesPerSecond.map { mps =>
+	  c.passwordsPerSecond.map { mps =>
 	    Thread.sleep(1000 / mps)
 	  }
     }
