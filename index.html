@@ -35,31 +35,46 @@
 
 <p>This project aims to solve the "password forgotten" problem for (Android) developers who happen to manage java keystore(s).</p>
 
-<h2>Features</h2>
-
-<p>This bruteforce tool is very simple, yet efficient. It will try all password combinations matching <code>[A-Za-z0-9]+</code>, from the shortest password, up to the solution.</p>
-
-<p>There are currently three options:</p>
-
-<ul>
-<li>
-<code>-l &lt;minLength&gt;</code> sets a minimum length for the password, if you know that it should have at least n characters (can save a lot of time)</li>
-<li>
-<code>-f &lt;fromPsswd&gt;</code> sets the combination from which the brute force should start</li>
-<li>
-<code>-t &lt;toPasswd&gt;</code> sets the last combination that sould be tested</li>
-</ul><blockquote>
-<p>Note: If you want to resume a stopped brute force, I suggest that you take the second last tried password that was stored in <code>$HOME/AndroidKeystoreRecovery.log</code>. Indeed, as actor computation is asynchronous, there is no guarantee that every password before the last one were <em>really</em> tried by the software.</p>
-</blockquote>
-
 <h2>Usage</h2>
+
+<p>This bruteforce tool is very simple, yet efficient. It will try all password combinations matching <code>[A-Za-z0-9]+</code> by default, from the shortest password, up to the solution.</p>
 
 <ol>
 <li>Download the <a href="http://download.bluepyth.fr/releases/">project jar</a>
 </li>
-<li>Launch the bruteforce: <code>java -jar akr-1.0.1.jar &lt;keystore&gt; [opts]</code>
+<li>Launch the bruteforce: <code>java -jar akr-1.1.0.jar &lt;keystore&gt; [opts]</code>
 </li>
-</ol><h2>Time needed to retrieve password</h2>
+</ol><h2>Options</h2>
+
+<p>These are the available options for AKR:</p>
+
+<h3>Generic options</h3>
+
+<ul>
+<li>
+<code>-l &lt;length&gt;   | --min-length &lt;length&gt;</code> start at given length</li>
+<li>
+<code>-f &lt;password&gt; | --from &lt;password&gt;</code> start at given password</li>
+<li>
+<code>-t &lt;password&gt; | --to &lt;password&gt;</code> stop at given password</li>
+<li>`-pps  | --passwords-per-second ̀  tries the given # of passwords/s (Since 1.1)</li>
+</ul><p>You can use <code>--from</code> and <code>--to</code> to parallelize the brute force on several computers.</p>
+
+<blockquote>
+<p>Note: If you want to resume a stopped brute force, I suggest that you take the second last tried password that was stored in <code>$HOME/AndroidKeystoreRecovery.log</code>. Indeed, as actor computation is asynchronous, there is no guarantee that every password before the last one were <em>really</em> tried by the software.</p>
+</blockquote>
+
+<h3> Character set options — since 1.1</h3>
+
+<ul>
+<li>`-lo         | --letters-onlỳ use letters only</li>
+<li>`-no         | --numbers-onlỳ use numbers only</li>
+<li>`-uc         | --upper-casè discards lower-case letters</li>
+<li>
+<code>-lc         | --lower-case</code> discards upper-case letters</li>
+<li>
+<code>-ec &lt;chars&gt; | --extra-characters &lt;chars&gt;</code> add specified characters in combinations</li>
+</ul><h2>Time needed to retrieve password</h2>
 
 <p>Bruteforce algorithms are not optimized at all, AKR is faster than other bruteforce tools but it will still try <strong>all</strong> password possibilities.</p>
 
