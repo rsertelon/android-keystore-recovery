@@ -21,7 +21,7 @@ import akka.actor.ActorSystem
 import akka.actor.PoisonPill
 import akka.actor.Props
 import akka.routing._
-import akka.util.duration._
+import scala.concurrent.duration._
 
 import java.io.FileInputStream
 
@@ -71,14 +71,14 @@ object App {
     val loggerActor = system.actorOf(Props[LoggerActor], "logger")
     
     val smallestMailboxRouter =
-    system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors * 75)), "router")
+    system.actorOf(Props(new TryPasswordActor(c.keystore.get, loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors)), "router")
     
     val passwordGenerator = new SimplePasswordGenerator(c)
 
     loggerActor ! StartingBruteForce("Starting Brute force of keystore located at " + c.keystore.get)
 
     while (passwordGenerator.hasNext && !system.isTerminated) {
-      smallestMailboxRouter ! Password(passwordGenerator.next)
+	  smallestMailboxRouter ! Password(passwordGenerator.next)
     }
 
     smallestMailboxRouter ! Broadcast(PoisonPill)

@@ -29,11 +29,11 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<encoding>UTF-8</encoding>
-		<scala.version>2.9.2</scala.version>
-		<akka.version>2.0.5</akka.version>
+		<scala.version>2.10.1</scala.version>
+		<akka.version>2.1.2</akka.version>
 		<scopt.version>2.1.0</scopt.version>
 		<logback.version>1.0.9</logback.version>
-		<specs2.version>1.12.3</specs2.version>
+		<specs2.version>1.14</specs2.version>
 		<junit.version>4.11</junit.version>
 	</properties>
 
@@ -45,12 +45,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-actor</artifactId>
+			<artifactId>akka-actor_2.10</artifactId>
 			<version>${akka.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-slf4j</artifactId>
+			<artifactId>akka-slf4j_2.10</artifactId>
 			<version>${akka.version}</version>
 		</dependency>
 		<dependency>
@@ -60,12 +60,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.scopt</groupId>
-			<artifactId>scopt_2.9.2</artifactId>
+			<artifactId>scopt_2.10</artifactId>
 			<version>${scopt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.specs2</groupId>
-			<artifactId>specs2_2.9.2</artifactId>
+			<artifactId>specs2_2.10</artifactId>
 			<version>${specs2.version}</version>
 			<scope>test</scope>
 		</dependency>

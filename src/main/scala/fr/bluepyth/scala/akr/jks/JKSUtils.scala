@@ -99,7 +99,7 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
     try {
       decryptKey(charsToBytes(password))
     } catch {
-      case e => false
+      case e: Exception => false
     }
   }
 
@@ -146,7 +146,7 @@ class JKSUtils(in: InputStream, passwd: Array[Char]) {
 
       MessageDigest.isEqual(check, sha.digest)
     } catch {
-      case e => println("exception " +e); false
+      case e: Exception => println("exception " +e); false
     }
   }
 
