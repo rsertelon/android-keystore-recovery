@@ -1,54 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Android Keystore Recovery : A tool to recover your lost Android keystore password " />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Android Keystore Recovery by BluePyth</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Android Keystore Recovery</title>
   </head>
-
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/BluePyth/android-keystore-recovery">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/BluePyth/android-keystore-recovery/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/BluePyth/android-keystore-recovery/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/BluePyth/android-keystore-recovery">View on GitHub</a>
+    <div class="wrapper">
 
-          <h1 id="project_title">Android Keystore Recovery</h1>
-          <h2 id="project_tagline">A tool to recover your lost Android keystore password </h2>
+      <section>
+        <div id="title">
+          <h1>Android Keystore Recovery</h1>
+          <p>A tool to recover your lost Android keystore password </p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/BluePyth">BluePyth</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/BluePyth/android-keystore-recovery/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/BluePyth/android-keystore-recovery/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h2>Android Keystore Recovery</h2>
+        <h2>
+<a name="android-keystore-recovery" class="anchor" href="#android-keystore-recovery"><span class="octicon octicon-link"></span></a>Android Keystore Recovery</h2>
 
 <p>This project aims to solve the "password forgotten" problem for (Android) developers who happen to manage java keystore(s).</p>
 
-<h2>Usage</h2>
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p>This bruteforce tool is very simple, yet efficient. It will try all password combinations matching <code>[A-Za-z0-9]+</code> by default, from the shortest password, up to the solution.</p>
 
 <ol>
-<li>Download the <a href="http://download.bluepyth.fr/releases/">project jar</a>
+<li>Download the <a href="http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.2.0/android-keystore-recovery-1.2.0-bundle.jar">project jar</a>
 </li>
-<li>Launch the bruteforce: <code>java -jar akr-1.1.0.jar &lt;keystore&gt; [opts]</code>
+<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.2.0-bundle.jar &lt;keystore&gt; [opts]</code>
 </li>
-</ol><h2>Options</h2>
+</ol><h2>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
 
 <p>These are the available options for AKR:</p>
 
-<h3>Generic options</h3>
+<h3>
+<a name="generic-options" class="anchor" href="#generic-options"><span class="octicon octicon-link"></span></a>Generic options</h3>
 
 <ul>
 <li>
@@ -57,14 +68,15 @@
 <code>-f &lt;password&gt; | --from &lt;password&gt;</code> start at given password</li>
 <li>
 <code>-t &lt;password&gt; | --to &lt;password&gt;</code> stop at given password</li>
-<li>`-pps  | --passwords-per-second ̀  tries the given # of passwords/s (Since 1.1)</li>
+<li>`-pps  | --passwords-per-second  Will try the given number of passwords per second (Since 1.1)</li>
 </ul><p>You can use <code>--from</code> and <code>--to</code> to parallelize the brute force on several computers.</p>
 
 <blockquote>
 <p>Note: If you want to resume a stopped brute force, I suggest that you take the second last tried password that was stored in <code>$HOME/AndroidKeystoreRecovery.log</code>. Indeed, as actor computation is asynchronous, there is no guarantee that every password before the last one were <em>really</em> tried by the software.</p>
 </blockquote>
 
-<h3> Character set options — since 1.1</h3>
+<h3>
+<a name="character-set-options--since-11" class="anchor" href="#character-set-options--since-11"><span class="octicon octicon-link"></span></a> Character set options — since 1.1</h3>
 
 <ul>
 <li>`-lo         | --letters-onlỳ use letters only</li>
@@ -74,7 +86,8 @@
 <code>-lc         | --lower-case</code> discards upper-case letters</li>
 <li>
 <code>-ec &lt;chars&gt; | --extra-characters &lt;chars&gt;</code> add specified characters in combinations</li>
-</ul><h2>Time needed to retrieve password</h2>
+</ul><h2>
+<a name="time-needed-to-retrieve-password" class="anchor" href="#time-needed-to-retrieve-password"><span class="octicon octicon-link"></span></a>Time needed to retrieve password</h2>
 
 <p>Bruteforce algorithms are not optimized at all, AKR is faster than other bruteforce tools but it will still try <strong>all</strong> password possibilities.</p>
 
@@ -93,36 +106,31 @@
 
 <p>You can use the <code>-f (--from)</code> and <code>-t (--to)</code> options to run AKR on different computers, to parallelize computation and try to shorten the discovery of the password.</p>
 
-<h2>Technical Information</h2>
+<h2>
+<a name="technical-information" class="anchor" href="#technical-information"><span class="octicon octicon-link"></span></a>Technical Information</h2>
 
 <p>This software runs on the Java Virtual Machine (JVM), so you need to have a Java Runtime Environnement (JRE) installed on your computer. If you don't have one, get it at <a href="http://java.com">http://java.com</a>.</p>
 
 <p>To benefit from multi-core computers, this software uses the awesome <a href="http://akka.io">Akka</a> actor library.</p>
 
-<h2>Development</h2>
+<h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
 
 <ul>
 <li>
 <strong>Pull Requests</strong>: I accept every meaningful pull request that you might offer. Please add description and comments in the code :)</li>
 <li>
 <strong>Issues</strong>: You can create issues, however, I don't know when I'll have time to fix them (will do my best!)</li>
-</ul><h2>Licence</h2>
+</ul><h2>
+<a name="licence" class="anchor" href="#licence"><span class="octicon octicon-link"></span></a>Licence</h2>
 
 <p>Copyright Romain Sertelon 2013</p>
 
 <p>This software is licenced under the GNU Public Licence v3 (GPLv3), you can find it in the <code>LICENCE</code> file.</p>
       </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Android Keystore Recovery maintained by <a href="https://github.com/BluePyth">BluePyth</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
     </div>
-
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>
