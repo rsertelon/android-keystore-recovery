@@ -1,4 +1,4 @@
-> Note that this README is updated for the latest snapshot version. If you want to use the last release, please visit [this page](http://bluepyth.github.com/android-keystore-recovery)
+> Note that this README is updated for the latest snapshot version. If you want to use the last release, please visit [this page](http://bluepyth.github.io/android-keystore-recovery)
 
 ## Android Keystore Recovery
 
@@ -8,8 +8,8 @@ This project aims to solve the "password forgotten" problem for (Android) develo
 
 This bruteforce tool is very simple, yet efficient. It will try all password combinations matching `[A-Za-z0-9]+` by default, from the shortest password, up to the solution.
 
-1. Download the [project jar](http://download.bluepyth.fr/releases/)
-2. Launch the bruteforce: `java -jar akr-1.1.0.jar <keystore> [opts]`
+1. Download the [project jar](http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.2.0/android-keystore-recovery-1.2.0-bundle.jar)
+2. Launch the bruteforce: `java -jar android-keystore-recovery-1.2.0-bundle.jar <keystore> [opts]`
 
 ## Options
 
