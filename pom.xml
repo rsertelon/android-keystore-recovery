@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.bluepyth</groupId>
     <artifactId>android-keystore-recovery</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1-SNAPSHOT</version>
 
     <name>Android Keystore Recovery</name>
     <description>Tool to recover your keystore password</description>
@@ -47,7 +47,7 @@
         <connection>scm:git:git://github.com/BluePyth/android-keystore-recovery.git</connection>
         <developerConnection>scm:git:https://github.com/BluePyth/android-keystore-recovery.git</developerConnection>
         <url>https://github.com/BluePyth/android-keystore-recovery</url>
-        <tag>1.2.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>
