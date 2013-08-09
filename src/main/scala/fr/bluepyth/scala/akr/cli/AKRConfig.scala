@@ -17,6 +17,8 @@
  */
 package fr.bluepyth.scala.akr.cli
 
+import java.io.File
+
 case class AKRConfig(
     minLength: Option[Int] = None, 
     from: Option[String] = None, 
@@ -27,4 +29,4 @@ case class AKRConfig(
     lowerCase: Boolean = false,
     passwordsPerSecond: Option[Int] = None,
     extraCharacters: Option[String] = None,
-    keystore: Option[String] = None)
+    keystore: Option[File] = None)

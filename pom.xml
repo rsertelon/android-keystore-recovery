@@ -65,10 +65,10 @@
         <maven-release-plugin.version>2.4</maven-release-plugin.version>
 
         <scala.version>2.10.2</scala.version>
-        <akka.version>2.1.4</akka.version>
-        <scopt.version>2.1.0</scopt.version>
+        <akka.version>2.2.0</akka.version>
+        <scopt.version>3.1.0</scopt.version>
         <logback.version>1.0.13</logback.version>
-        <specs2.version>1.14</specs2.version>
+        <specs2.version>2.1.1</specs2.version>
         <junit.version>4.11</junit.version>
     </properties>
 
