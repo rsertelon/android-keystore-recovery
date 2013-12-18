@@ -17,11 +17,11 @@
  */
 package fr.bluepyth.scala.akr.actor
 
-case class StartApp
-case class StopApp
+case class StartApp()
+case class StopApp()
 
-case class TryPassword
-case class Next
+case class TryPassword()
+case class Next()
 
 case class Password(p: Array[Char])
 
