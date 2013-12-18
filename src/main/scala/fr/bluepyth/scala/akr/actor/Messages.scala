@@ -15,18 +15,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr.cli
+package fr.bluepyth.scala.akr.actor
 
-import java.io.File
+case class StartApp
+case class StopApp
 
-case class AKRConfig(
-    minLength: Option[Int] = None, 
-    from: Option[String] = None, 
-    to: Option[String] = None,
-    lettersOnly: Boolean = false,
-    numbersOnly: Boolean = false,
-    upperCase: Boolean = false,
-    lowerCase: Boolean = false,
-    passwordsPerSecond: Option[Int] = None,
-    extraCharacters: Option[String] = None,
-    keystore: Option[File] = None)
+case class TryPassword
+case class Next
+
+case class Password(p: Array[Char])
+
+case class StartingBruteForce(message: String)
+case class PasswordFound(p: String)
+case class TriedPassword(p: Array[Char])

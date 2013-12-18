@@ -17,11 +17,7 @@
  */
 package fr.bluepyth.scala.akr.actor
 
-import akka.actor.Actor
-import akka.actor.ActorLogging
-import fr.bluepyth.scala.akr.message._
-import akka.actor.ActorRef
-import akka.actor.PoisonPill
+import akka.actor._
 
 class LoggerActor(app: ActorRef) extends Actor with ActorLogging {
 

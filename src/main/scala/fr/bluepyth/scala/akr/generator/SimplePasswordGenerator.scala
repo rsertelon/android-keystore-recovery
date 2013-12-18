@@ -17,7 +17,7 @@
  */
 package fr.bluepyth.scala.akr.generator
 
-import fr.bluepyth.scala.akr.cli.AKRConfig
+import fr.bluepyth.scala.akr.AKRConfig
 
 class SimplePasswordGenerator(c: AKRConfig) {
 
@@ -32,7 +32,6 @@ class SimplePasswordGenerator(c: AKRConfig) {
     'w', 'x', 'y', 'z')
     
   val numbers = Array[Char]('0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
-  
   
   val letters = (if(!c.lowerCase) upperCaseLetters else Array[Char]()) ++ 
   				(if (!c.upperCase) lowerCaseLetters else Array[Char]())

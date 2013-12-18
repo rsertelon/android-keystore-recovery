@@ -20,7 +20,7 @@ package fr.bluepyth.scala.akr.generator
 import org.specs2.mutable.Specification
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
-import fr.bluepyth.scala.akr.cli.AKRConfig
+import fr.bluepyth.scala.akr.AKRConfig
 
 @RunWith(classOf[JUnitRunner])
 class SimplePasswordGeneratorSpec extends Specification {

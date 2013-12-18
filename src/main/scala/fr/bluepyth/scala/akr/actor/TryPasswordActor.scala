@@ -17,14 +17,9 @@
  */
 package fr.bluepyth.scala.akr.actor
 
-import akka.actor.Actor
-import akka.actor.ActorLogging
-import akka.actor.ActorRef
-import akka.actor.actorRef2Scala
+import akka.actor._
+
 import fr.bluepyth.scala.akr.jks.JKSUtils
-import fr.bluepyth.scala.akr.message._
-import java.io.File
-import akka.actor.PoisonPill
 
 class TryPasswordActor(logger: ActorRef)(implicit jksUtils: JKSUtils) extends Actor {
   def receive = {

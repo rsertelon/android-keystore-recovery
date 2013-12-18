@@ -24,10 +24,11 @@ import akka.routing._
 import akka.contrib.throttle._
 import akka.contrib.throttle.Throttler._
 
-import fr.bluepyth.scala.akr.cli.AKRConfig
+import fr.bluepyth.scala.akr.actor._
+import fr.bluepyth.scala.akr.AKRConfig
 import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
 import fr.bluepyth.scala.akr.jks.JKSUtils
-import fr.bluepyth.scala.akr.actor._
+
 import scala.concurrent.duration._
 
 class AppActor(config: AKRConfig) extends Actor {

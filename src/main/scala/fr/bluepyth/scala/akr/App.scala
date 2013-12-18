@@ -18,16 +18,12 @@
 package fr.bluepyth.scala.akr
 
 import akka.actor._
-import akka.routing._
-import scala.concurrent.duration._
-import java.io.FileInputStream
-import fr.bluepyth.scala.akr.cli.AKRConfig
+
 import fr.bluepyth.scala.akr.actor._
-import fr.bluepyth.scala.akr.jks.JKSUtils
-import fr.bluepyth.scala.akr.message._
-import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
-import scopt.OptionParser
+
 import java.io.File
+
+import scopt.OptionParser
 
 object App {
 
