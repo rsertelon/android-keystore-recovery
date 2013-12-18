@@ -35,7 +35,7 @@
           <p>A tool to recover your lost Android keystore password </p>
           <hr>
           <span class="credits left">Project maintained by <a href="https://github.com/BluePyth">BluePyth</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
         <h2>
@@ -49,9 +49,9 @@
 <p>This bruteforce tool is very simple, yet efficient. It will try all password combinations matching <code>[A-Za-z0-9]+</code> by default, from the shortest password, up to the solution.</p>
 
 <ol>
-<li>Download the <a href="http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.2.0/android-keystore-recovery-1.2.0-bundle.jar">project jar</a>
+<li>Download the <a href="http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.3.0/android-keystore-recovery-1.3.0-bundle.jar">project jar</a>
 </li>
-<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.2.0-bundle.jar &lt;keystore&gt; [opts]</code>
+<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.3.0-bundle.jar &lt;keystore&gt; [opts]</code>
 </li>
 </ol><h2>
 <a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
@@ -68,8 +68,7 @@
 <code>-f &lt;password&gt; | --from &lt;password&gt;</code> start at given password</li>
 <li>
 <code>-t &lt;password&gt; | --to &lt;password&gt;</code> stop at given password</li>
-<li>
-<code>-pps &lt;number&gt; | --passwords-per-second &lt;number&gt;</code> Will try the given number of passwords per second (Since 1.1)</li>
+<li>`-pps  | --passwords-per-second  Will try the given number of passwords per second (Since 1.1)</li>
 </ul><p>You can use <code>--from</code> and <code>--to</code> to parallelize the brute force on several computers.</p>
 
 <blockquote>
@@ -80,12 +79,9 @@
 <a name="character-set-options--since-11" class="anchor" href="#character-set-options--since-11"><span class="octicon octicon-link"></span></a> Character set options — since 1.1</h3>
 
 <ul>
-<li>
-<code>-lo         | --letters-only</code> use letters only</li>
-<li>
-<code>-no         | --numbers-only</code> use numbers only</li>
-<li>
-<code>-uc         | --upper-case</code> discards lower-case letters</li>
+<li>`-lo         | --letters-onlỳ use letters only</li>
+<li>`-no         | --numbers-onlỳ use numbers only</li>
+<li>`-uc         | --upper-casè discards lower-case letters</li>
 <li>
 <code>-lc         | --lower-case</code> discards upper-case letters</li>
 <li>
@@ -99,11 +95,11 @@
 
 <p>Depending on your hardware, AKR will try more or less passwords per second, this is a sample calculation with my own computer:</p>
 
-<pre><code>- AKR velocity: v = 120 000 passwords/seconds
+<pre><code>- AKR velocity: v = 420 000 passwords/seconds
 - Number of combinations for a password of length n: 62^n
 - Number of combinations for a 6 characters password: 56 800 235 584
-- Time needed to try all these combinations: 56 800 235 584 / v = 5.5 days!
-- Time needed for 7 character passwords: 5.5 * 62 = 339 days!
+- Time needed to try all these combinations: 56 800 235 584 / v = 1.5 days
+- Time needed for 7 character passwords: 1.5 * 62 = 93 days!
 </code></pre>
 
 <p>As you can see, brute force with a single computer can take a very long time...</p>
