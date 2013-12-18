@@ -91,6 +91,11 @@
 				<version>${akka.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.typesafe.akka</groupId>
+				<artifactId>akka-contrib_2.10</artifactId>
+				<version>${akka.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
@@ -127,6 +132,10 @@
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-slf4j_2.10</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-contrib_2.10</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>

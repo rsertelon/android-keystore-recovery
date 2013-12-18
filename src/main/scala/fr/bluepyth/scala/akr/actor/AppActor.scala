@@ -21,11 +21,14 @@ import java.io.FileInputStream
 
 import akka.actor._
 import akka.routing._
+import akka.contrib.throttle._
+import akka.contrib.throttle.Throttler._
 
 import fr.bluepyth.scala.akr.cli.AKRConfig
 import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
 import fr.bluepyth.scala.akr.jks.JKSUtils
-import fr.bluepyth.scala.akr.message._
+import fr.bluepyth.scala.akr.actor._
+import scala.concurrent.duration._
 
 class AppActor(config: AKRConfig) extends Actor {
 
@@ -38,6 +41,12 @@ class AppActor(config: AKRConfig) extends Actor {
   val logger = context.actorOf(Props(new LoggerActor(self)), "logger")
   val router = context.actorOf(Props(new TryPasswordActor(logger)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors)), "router")
 
+  val throttler = config.passwordsPerSecond.map { mps =>
+    val t = context.actorOf(Props(classOf[TimerBasedThrottler], mps msgsPer 1.second))
+    t ! SetTarget(Some(self))
+    t
+  }
+  
   context.watch(router)
   
   var continue = true
@@ -50,19 +59,13 @@ class AppActor(config: AKRConfig) extends Actor {
     case TryPassword =>
       if (passGen.hasNext) {
         router ! Password(passGen.next)
-
-        // I know this is dirty, but it does the job quite well
-        config.passwordsPerSecond.map { mps =>
-          Thread.sleep(1000 / mps)
-        }
-
         self ! Next
       } else {
         self ! StopApp
       }
     case Next =>
       if(continue) {
-    	self ! TryPassword
+        throttler.getOrElse(self) ! TryPassword
       }
     case StopApp => {
       continue = false
