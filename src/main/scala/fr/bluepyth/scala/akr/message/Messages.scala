@@ -17,10 +17,17 @@
  */
 package fr.bluepyth.scala.akr.message
 
-case class StartingBruteForce(message: String)
+import fr.bluepyth.scala.akr.cli.AKRConfig
+import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
+
+case class StartApp
+case class StopApp
+
+case class TryPassword
+case class Next
 
 case class Password(p: Array[Char])
 
+case class StartingBruteForce(message: String)
 case class PasswordFound(p: String)
-
 case class TriedPassword(p: Array[Char])

@@ -24,10 +24,11 @@ import akka.actor.actorRef2Scala
 import fr.bluepyth.scala.akr.jks.JKSUtils
 import fr.bluepyth.scala.akr.message._
 import java.io.File
+import akka.actor.PoisonPill
 
-class TryPasswordActor(loggerActor: ActorRef)(implicit jksUtils: JKSUtils) extends Actor with ActorLogging {
+class TryPasswordActor(logger: ActorRef)(implicit jksUtils: JKSUtils) extends Actor {
   def receive = {
     case Password(x) =>
-      loggerActor ! (if(jksUtils.keyIsRight(x)) PasswordFound(x.mkString) else TriedPassword(x))
+      logger ! (if(jksUtils.keyIsRight(x)) PasswordFound(x.mkString) else TriedPassword(x))
   }
 }

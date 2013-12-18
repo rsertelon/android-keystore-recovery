@@ -29,12 +29,11 @@ import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
 import scopt.OptionParser
 import java.io.File
 
-/**
- * @author BluePyth
- */
 object App {
 
   def main(args: Array[String]) {
+    
+    val system = ActorSystem("bruteforce")
 
     val parser = new OptionParser[AKRConfig]("AKR") {
         head("AKR", "1.1.0")
@@ -51,43 +50,11 @@ object App {
     }
 
     parser.parse(args, AKRConfig()) map { config =>
-      startBruteForce(config)
+      val appActor = system.actorOf(Props(new AppActor(config)))
+      appActor ! StartApp
     } getOrElse {
       // arguments are bad, usage message will have been displayed
     }
-  }
-
-  def startBruteForce(c: AKRConfig) = {
-
-    val inJKSUtils = new FileInputStream(c.keystore.get)
-    implicit val jksUtils = new JKSUtils(inJKSUtils, new Array[Char](1))
-    inJKSUtils.close
-
-    val system = ActorSystem("bruteforce")
-
-    val loggerActor = system.actorOf(Props[LoggerActor], "logger")
-    
-    val smallestMailboxRouter =
-    	system.actorOf(Props(new TryPasswordActor(loggerActor)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors)), "router")
-    
-    val passwordGenerator = new SimplePasswordGenerator(c)
-
-    loggerActor ! StartingBruteForce("Starting Brute force of keystore located at " + c.keystore.get)
-
-    while (passwordGenerator.hasNext && !system.isTerminated) {
-	  smallestMailboxRouter ! Password(passwordGenerator.next)
-	  
-	  // I know this is dirty, but it does the job quite well
-	  c.passwordsPerSecond.map { mps =>
-	    Thread.sleep(1000 / mps)
-	  }
-    }
-
-    smallestMailboxRouter ! Broadcast(PoisonPill)
-
-    while (!smallestMailboxRouter.isTerminated) {}
-
-    loggerActor ! PoisonPill
   }
 
 }
