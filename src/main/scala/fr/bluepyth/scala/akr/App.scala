@@ -46,7 +46,7 @@ object App {
     }
 
     parser.parse(args, AKRConfig()) map { config =>
-      val appActor = system.actorOf(Props(new AppActor(config)))
+      val appActor = system.actorOf(Props(new AppActor(config)), "app")
       appActor ! StartApp
     } getOrElse {
       // arguments are bad, usage message will have been displayed
