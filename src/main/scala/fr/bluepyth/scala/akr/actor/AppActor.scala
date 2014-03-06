@@ -40,7 +40,7 @@ class AppActor(config: AKRConfig) extends Actor {
   val passGen = new SimplePasswordGenerator(config)
 
   val logger = context.actorOf(Props(new LoggerActor(self)), "logger")
-  val router = context.actorOf(Props(new TryPasswordActor(logger)).withRouter(SmallestMailboxRouter(Runtime.getRuntime.availableProcessors)), "router")
+  val router = context.actorOf(Props(new TryPasswordActor(logger)).withRouter(SmallestMailboxPool(Runtime.getRuntime.availableProcessors)), "router")
 
   val throttler = config.passwordsPerSecond.map { mps =>
     val t = context.actorOf(Props(classOf[TimerBasedThrottler], mps msgsPer 1.second))
