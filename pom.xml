@@ -64,7 +64,7 @@
 		<encoding>UTF-8</encoding>
 		<maven-release-plugin.version>2.4</maven-release-plugin.version>
 
-		<scala.version>2.10.3</scala.version>
+		<scala.version>2.11.0</scala.version>
 		<akka.version>2.3.2</akka.version>
 		<scopt.version>3.2.0</scopt.version>
 		<logback.version>1.1.2</logback.version>
@@ -81,17 +81,17 @@
 			</dependency>
 			<dependency>
 				<groupId>com.typesafe.akka</groupId>
-				<artifactId>akka-actor_2.10</artifactId>
+				<artifactId>akka-actor_2.11</artifactId>
 				<version>${akka.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.typesafe.akka</groupId>
-				<artifactId>akka-slf4j_2.10</artifactId>
+				<artifactId>akka-slf4j_2.11</artifactId>
 				<version>${akka.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.typesafe.akka</groupId>
-				<artifactId>akka-contrib_2.10</artifactId>
+				<artifactId>akka-contrib_2.11</artifactId>
 				<version>${akka.version}</version>
 			</dependency>
 			<dependency>
@@ -101,12 +101,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.github.scopt</groupId>
-				<artifactId>scopt_2.10</artifactId>
+				<artifactId>scopt_2.11</artifactId>
 				<version>${scopt.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.specs2</groupId>
-				<artifactId>specs2_2.10</artifactId>
+				<artifactId>specs2_2.11</artifactId>
 				<version>${specs2.version}</version>
 				<scope>test</scope>
 			</dependency>
@@ -126,15 +126,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-actor_2.10</artifactId>
+			<artifactId>akka-actor_2.11</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-slf4j_2.10</artifactId>
+			<artifactId>akka-slf4j_2.11</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-contrib_2.10</artifactId>
+			<artifactId>akka-contrib_2.11</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -142,11 +142,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.scopt</groupId>
-			<artifactId>scopt_2.10</artifactId>
+			<artifactId>scopt_2.11</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.specs2</groupId>
-			<artifactId>specs2_2.10</artifactId>
+			<artifactId>specs2_2.11</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
