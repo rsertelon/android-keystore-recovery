@@ -64,8 +64,8 @@
 		<encoding>UTF-8</encoding>
 		<maven-release-plugin.version>2.4</maven-release-plugin.version>
 
-		<scala.version>2.11.1</scala.version>
-		<akka.version>2.3.4</akka.version>
+		<scala.version>2.11.2</scala.version>
+		<akka.version>2.3.5</akka.version>
 		<scopt.version>3.2.0</scopt.version>
 		<logback.version>1.1.2</logback.version>
 		<specs2.version>2.3.12</specs2.version>
