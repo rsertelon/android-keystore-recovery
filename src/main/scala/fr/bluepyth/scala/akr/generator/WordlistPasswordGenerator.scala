@@ -15,19 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.bluepyth.scala.akr.generator
 
-import java.io.File
+import fr.bluepyth.scala.akr.{PasswordGenerator, AKRConfig}
 
-case class AKRConfig(
-    minLength: Option[Int] = None, 
-    from: Option[String] = None, 
-    to: Option[String] = None,
-    lettersOnly: Boolean = false,
-    numbersOnly: Boolean = false,
-    upperCase: Boolean = false,
-    lowerCase: Boolean = false,
-    passwordsPerSecond: Option[Int] = None,
-    extraCharacters: Option[String] = None,
-    keystore: Option[File] = None,
-    wordlist: Option[File] = None)
+import scala.io.Source
+
+class WordlistPasswordGenerator(c: AKRConfig) extends PasswordGenerator {
+  val worlistFile = Source.fromFile(c.wordlist.get)
+  val wordlistFileSize = Source.fromFile(c.wordlist.get).getLines().size
+
+  val fromLine = c.from.map(_.toInt - 1).getOrElse(0)
+  val toLine = c.to.map(_.toInt).getOrElse(wordlistFileSize)
+
+  val passwordsBlock = worlistFile.getLines().slice(fromLine, toLine)
+
+  def hasNext = passwordsBlock.hasNext
+  def next: Array[Char] = passwordsBlock.next().toCharArray
+
+
+}

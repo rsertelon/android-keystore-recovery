@@ -25,8 +25,8 @@ import akka.contrib.throttle._
 import akka.contrib.throttle.Throttler._
 
 import fr.bluepyth.scala.akr.actor._
-import fr.bluepyth.scala.akr.AKRConfig
-import fr.bluepyth.scala.akr.generator.SimplePasswordGenerator
+import fr.bluepyth.scala.akr.{PasswordGenerator, AKRConfig}
+import fr.bluepyth.scala.akr.generator.{WordlistPasswordGenerator, SimplePasswordGenerator}
 import fr.bluepyth.scala.akr.jks.JKSUtils
 
 import scala.concurrent.duration._
@@ -37,7 +37,10 @@ class AppActor(config: AKRConfig) extends Actor {
   implicit val jksUtils = new JKSUtils(inJKSUtils, new Array[Char](1))
   inJKSUtils.close
 
-  val passGen = new SimplePasswordGenerator(config)
+  val passGen: PasswordGenerator = config.wordlist match {
+    case Some(x) => new WordlistPasswordGenerator(config)
+    case None => new SimplePasswordGenerator(config)
+  }
 
   val logger = context.actorOf(Props(new LoggerActor(self)), "logger")
   val router = context.actorOf(Props(new TryPasswordActor(logger)).withRouter(SmallestMailboxPool(Runtime.getRuntime.availableProcessors)), "router")

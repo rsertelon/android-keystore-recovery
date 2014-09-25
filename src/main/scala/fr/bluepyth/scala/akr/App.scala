@@ -36,13 +36,14 @@ object App {
         opt[String]("to")                   abbr("t")   action { (v, c) => c.copy(to                 = Some(v)) } text("stop at given password")
         opt[String]("from")                 abbr("f")   action { (v, c) => c.copy(from               = Some(v)) } text("start at given password")
         arg[File]  ("keystore")                         action { (v, c) => c.copy(keystore           = Some(v)) } text("the keystore that will be bruteforced")
+        opt[File]  ("wordlist")             abbr("w")   action { (v, c) => c.copy(wordlist           = Some(v)) } text("path to wordlist file (example: /../../wordlist.txt)")
         opt[Int]   ("min-length")           abbr("l")   action { (v, c) => c.copy(minLength          = Some(v)) } text("start at given length") 
         opt[Unit]  ("lower-case")           abbr("lc")  action { (_, c) => c.copy(lowerCase          = true)    } text("discards upper-case letters")
         opt[Unit]  ("upper-case")           abbr("uc")  action { (_, c) => c.copy(upperCase          = true)    } text("discards lower-case letters")
         opt[Unit]  ("letters-only")         abbr("lo")  action { (_, c) => c.copy(lettersOnly        = true)    } text("use letters only")
         opt[Unit]  ("numbers-only")         abbr("no")  action { (_, c) => c.copy(numbersOnly        = true)    } text("use numbers only")
         opt[String]("extra-characters")     abbr("ec")  action { (v, c) => c.copy(extraCharacters    = Some(v)) } text("add specified characters in combinations")
-        opt[Int]   ("passwords-per-second") abbr("pps") action { (v, c) => c.copy(passwordsPerSecond = Some(v)) } text("number of passwords tested per second") 
+        opt[Int]   ("passwords-per-second") abbr("pps") action { (v, c) => c.copy(passwordsPerSecond = Some(v)) } text("number of passwords tested per second")
     }
 
     parser.parse(args, AKRConfig()) map { config =>
@@ -50,6 +51,7 @@ object App {
       appActor ! StartApp
     } getOrElse {
       // arguments are bad, usage message will have been displayed
+      system.shutdown()
     }
   }
 
