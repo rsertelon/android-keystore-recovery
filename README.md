@@ -18,8 +18,8 @@ These are the available options for AKR:
 ### Generic options
 
 * `-l <length>   | --min-length <length>` start at given length
-* `-f <password> | --from <password>` start at given password
-* `-t <password> | --to <password>` stop at given password
+* `-f <password> | --from <password>` start at given password (in dictionary attack this is a start line number)
+* `-t <password> | --to <password>` stop at given password (in dictionary attack this is a end line number)
 * `-pps <number> | --passwords-per-second <number> Will try the given number of passwords per second (Since 1.1)
 
 You can use `--from` and `--to` to parallelize the brute force on several computers.
