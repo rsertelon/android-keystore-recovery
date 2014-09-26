@@ -21,6 +21,7 @@ These are the available options for AKR:
 * `-f <password> | --from <password>` start at given password (in dictionary attack this is a start line number)
 * `-t <password> | --to <password>` stop at given password (in dictionary attack this is a end line number)
 * `-pps <number> | --passwords-per-second <number> Will try the given number of passwords per second (Since 1.1)
+* `-w <path>     | --wordlist <path> path to wordlist file (example: /../../wordlist.txt)
 
 You can use `--from` and `--to` to parallelize the brute force on several computers.
 
