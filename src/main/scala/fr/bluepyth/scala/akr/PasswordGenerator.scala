@@ -17,17 +17,7 @@
  */
 package fr.bluepyth.scala.akr
 
-import java.io.File
-
-case class AKRConfig(
-    minLength: Option[Int] = None, 
-    from: Option[String] = None, 
-    to: Option[String] = None,
-    lettersOnly: Boolean = false,
-    numbersOnly: Boolean = false,
-    upperCase: Boolean = false,
-    lowerCase: Boolean = false,
-    passwordsPerSecond: Option[Int] = None,
-    extraCharacters: Option[String] = None,
-    keystore: Option[File] = None,
-    wordlist: Option[File] = None)
+trait PasswordGenerator {
+  def hasNext: Boolean
+  def next: Array[Char]
+}

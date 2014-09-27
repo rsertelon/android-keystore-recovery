@@ -17,9 +17,9 @@
  */
 package fr.bluepyth.scala.akr.generator
 
-import fr.bluepyth.scala.akr.AKRConfig
+import fr.bluepyth.scala.akr.{PasswordGenerator, AKRConfig}
 
-class SimplePasswordGenerator(c: AKRConfig) {
+class SimplePasswordGenerator(c: AKRConfig) extends PasswordGenerator {
 
   val upperCaseLetters = Array[Char](
 	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
