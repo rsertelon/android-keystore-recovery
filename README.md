@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rsertelon/android-keystore-recovery.svg?branch=master)](https://travis-ci.org/rsertelon/android-keystore-recovery)
+
 > Note that this README is updated for the latest snapshot version. If you want to use the last release, please visit [this page](http://bluepyth.github.io/android-keystore-recovery)
 
 ## Android Keystore Recovery
