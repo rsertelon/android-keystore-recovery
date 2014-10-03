@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Android Keystore Recovery by BluePyth</title>
+    <title>Android Keystore Recovery by rsertelon</title>
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -20,9 +20,9 @@
   <body>
       <div id="header">
         <nav>
-          <li class="fork"><a href="https://github.com/BluePyth/android-keystore-recovery">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/BluePyth/android-keystore-recovery/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/BluePyth/android-keystore-recovery/tarball/master">TAR</a></li>
+          <li class="fork"><a href="https://github.com/rsertelon/android-keystore-recovery">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/rsertelon/android-keystore-recovery/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/rsertelon/android-keystore-recovery/tarball/master">TAR</a></li>
           <li class="title">DOWNLOADS</li>
         </nav>
       </div><!-- end header -->
@@ -34,7 +34,7 @@
           <h1>Android Keystore Recovery</h1>
           <p>A tool to recover your lost Android keystore password </p>
           <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/BluePyth">BluePyth</a></span>
+          <span class="credits left">Project maintained by <a href="https://github.com/rsertelon">rsertelon</a></span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
@@ -49,9 +49,9 @@
 <p>This bruteforce tool is very simple, yet efficient. It will try all password combinations matching <code>[A-Za-z0-9]+</code> by default, from the shortest password, up to the solution.</p>
 
 <ol>
-<li>Download the <a href="http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.3.0/android-keystore-recovery-1.3.0-bundle.jar">project jar</a>
+<li>Download the <a href="http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.2.0/android-keystore-recovery-1.2.0-bundle.jar">project jar</a>
 </li>
-<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.3.0-bundle.jar &lt;keystore&gt; [opts]</code>
+<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.2.0-bundle.jar &lt;keystore&gt; [opts]</code>
 </li>
 </ol><h2>
 <a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
@@ -65,9 +65,9 @@
 <li>
 <code>-l &lt;length&gt;   | --min-length &lt;length&gt;</code> start at given length</li>
 <li>
-<code>-f &lt;password&gt; | --from &lt;password&gt;</code> start at given password</li>
+<code>-f &lt;password&gt; | --from &lt;password&gt;</code> start at given password (in dictionary attack this is a start line number)</li>
 <li>
-<code>-t &lt;password&gt; | --to &lt;password&gt;</code> stop at given password</li>
+<code>-t &lt;password&gt; | --to &lt;password&gt;</code> stop at given password (in dictionary attack this is a end line number)</li>
 <li>`-pps  | --passwords-per-second  Will try the given number of passwords per second (Since 1.1)</li>
 </ul><p>You can use <code>--from</code> and <code>--to</code> to parallelize the brute force on several computers.</p>
 
@@ -95,11 +95,11 @@
 
 <p>Depending on your hardware, AKR will try more or less passwords per second, this is a sample calculation with my own computer:</p>
 
-<pre><code>- AKR velocity: v = 420 000 passwords/seconds
+<pre><code>- AKR velocity: v = 120 000 passwords/seconds
 - Number of combinations for a password of length n: 62^n
 - Number of combinations for a 6 characters password: 56 800 235 584
-- Time needed to try all these combinations: 56 800 235 584 / v = 1.5 days
-- Time needed for 7 character passwords: 1.5 * 62 = 93 days!
+- Time needed to try all these combinations: 56 800 235 584 / v = 5.5 days!
+- Time needed for 7 character passwords: 5.5 * 62 = 339 days!
 </code></pre>
 
 <p>As you can see, brute force with a single computer can take a very long time...</p>
