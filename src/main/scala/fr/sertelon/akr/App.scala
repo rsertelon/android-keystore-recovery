@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.sertelon.akr
 
 import akka.actor._
 
-import fr.bluepyth.scala.akr.actor._
+import fr.sertelon.akr.actor._
 
 import java.io.File
 

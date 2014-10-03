@@ -15,16 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr.actor
+package fr.sertelon.akr.generator
 
-case class StartApp()
-case class StopApp()
+import fr.sertelon.akr.{PasswordGenerator, AKRConfig}
 
-case class TryPassword()
-case class Next()
+import scala.io.Source
 
-case class Password(p: Array[Char])
+class WordlistPasswordGenerator(c: AKRConfig) extends PasswordGenerator {
+  val worlistFile = Source.fromFile(c.wordlist.get)
+  val wordlistFileSize = Source.fromFile(c.wordlist.get).getLines().size
 
-case class StartingBruteForce(message: String)
-case class PasswordFound(p: String)
-case class TriedPassword(p: Array[Char])
+  val fromLine = c.from.map(_.toInt - 1).getOrElse(0)
+  val toLine = c.to.map(_.toInt).getOrElse(wordlistFileSize)
+
+  val passwordsBlock = worlistFile.getLines().slice(fromLine, toLine)
+
+  def hasNext = passwordsBlock.hasNext
+  def next: Array[Char] = passwordsBlock.next().toCharArray
+
+
+}

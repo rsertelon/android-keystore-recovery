@@ -15,19 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.sertelon.akr
 
-import java.io.File
-
-case class AKRConfig(
-    minLength: Option[Int] = None, 
-    from: Option[String] = None, 
-    to: Option[String] = None,
-    lettersOnly: Boolean = false,
-    numbersOnly: Boolean = false,
-    upperCase: Boolean = false,
-    lowerCase: Boolean = false,
-    passwordsPerSecond: Option[Int] = None,
-    extraCharacters: Option[String] = None,
-    keystore: Option[File] = None,
-    wordlist: Option[File] = None)
+trait PasswordGenerator {
+  def hasNext: Boolean
+  def next: Array[Char]
+}

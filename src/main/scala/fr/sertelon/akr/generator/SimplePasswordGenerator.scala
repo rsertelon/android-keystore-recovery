@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr.generator
+package fr.sertelon.akr.generator
 
-import fr.bluepyth.scala.akr.{PasswordGenerator, AKRConfig}
+import fr.sertelon.akr.{PasswordGenerator, AKRConfig}
 
 class SimplePasswordGenerator(c: AKRConfig) extends PasswordGenerator {
 
