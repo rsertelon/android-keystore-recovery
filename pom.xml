@@ -9,7 +9,7 @@
 
 	<groupId>fr.sertelon.akr</groupId>
 	<artifactId>android-keystore-recovery</artifactId>
-	<version>1.4.0</version>
+	<version>1.4.1-SNAPSHOT</version>
 
 	<name>Android Keystore Recovery</name>
 	<description>Tool to recover your keystore password</description>
