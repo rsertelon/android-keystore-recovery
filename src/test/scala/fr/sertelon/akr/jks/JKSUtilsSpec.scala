@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr.jks
+package fr.sertelon.akr.jks
 
 import org.junit.runner.RunWith
 import org.specs2.mutable.Specification

@@ -15,9 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr
+package fr.sertelon.akr.actor
 
-trait PasswordGenerator {
-  def hasNext: Boolean
-  def next: Array[Char]
+import akka.actor._
+
+import fr.sertelon.akr.jks.JKSUtils
+
+class TryPasswordActor(logger: ActorRef)(implicit jksUtils: JKSUtils) extends Actor {
+  def receive = {
+    case Password(x) =>
+      logger ! (if(jksUtils.keyIsRight(x)) PasswordFound(x.mkString) else TriedPassword(x))
+  }
 }

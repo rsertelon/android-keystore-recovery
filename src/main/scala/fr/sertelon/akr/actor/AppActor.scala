@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.bluepyth.scala.akr.actor
+package fr.sertelon.akr.actor
 
 import java.io.FileInputStream
 
@@ -24,10 +24,10 @@ import akka.routing._
 import akka.contrib.throttle._
 import akka.contrib.throttle.Throttler._
 
-import fr.bluepyth.scala.akr.actor._
-import fr.bluepyth.scala.akr.{PasswordGenerator, AKRConfig}
-import fr.bluepyth.scala.akr.generator.{WordlistPasswordGenerator, SimplePasswordGenerator}
-import fr.bluepyth.scala.akr.jks.JKSUtils
+import fr.sertelon.akr.actor._
+import fr.sertelon.akr.{PasswordGenerator, AKRConfig}
+import fr.sertelon.akr.generator.{WordlistPasswordGenerator, SimplePasswordGenerator}
+import fr.sertelon.akr.jks.JKSUtils
 
 import scala.concurrent.duration._
 
