@@ -10,8 +10,8 @@ This project aims to solve the "password forgotten" problem for (Android) develo
 
 This bruteforce tool is very simple, yet efficient. It will try all password combinations matching `[A-Za-z0-9]+` by default, from the shortest password, up to the solution.
 
-1. Download the [project jar](http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.2.0/android-keystore-recovery-1.2.0-bundle.jar)
-2. Launch the bruteforce: `java -jar android-keystore-recovery-1.2.0-bundle.jar <keystore> [opts]`
+1. Download the [project jar](https://repo1.maven.org/maven2/fr/sertelon/akr/android-keystore-recovery/1.4.0/android-keystore-recovery-1.4.0-bundle.jar)
+2. Launch the bruteforce: `java -jar android-keystore-recovery-1.4.0-bundle.jar <keystore> [opts]`
 
 ## Options
 
