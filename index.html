@@ -38,7 +38,9 @@
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
 
-        <h2>
+        <p><a href="https://travis-ci.org/rsertelon/android-keystore-recovery"><img src="https://travis-ci.org/rsertelon/android-keystore-recovery.svg?branch=master" alt="Build Status"></a></p>
+
+<h2>
 <a name="android-keystore-recovery" class="anchor" href="#android-keystore-recovery"><span class="octicon octicon-link"></span></a>Android Keystore Recovery</h2>
 
 <p>This project aims to solve the "password forgotten" problem for (Android) developers who happen to manage java keystore(s).</p>
@@ -49,9 +51,9 @@
 <p>This bruteforce tool is very simple, yet efficient. It will try all password combinations matching <code>[A-Za-z0-9]+</code> by default, from the shortest password, up to the solution.</p>
 
 <ol>
-<li>Download the <a href="http://repository.bluepyth.fr/nexus/content/repositories/releases/fr/bluepyth/android-keystore-recovery/1.2.0/android-keystore-recovery-1.2.0-bundle.jar">project jar</a>
+<li>Download the <a href="https://repo1.maven.org/maven2/fr/sertelon/akr/android-keystore-recovery/1.4.0/android-keystore-recovery-1.4.0-bundle.jar">project jar</a>
 </li>
-<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.2.0-bundle.jar &lt;keystore&gt; [opts]</code>
+<li>Launch the bruteforce: <code>java -jar android-keystore-recovery-1.4.0-bundle.jar &lt;keystore&gt; [opts]</code>
 </li>
 </ol><h2>
 <a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h2>
@@ -69,6 +71,7 @@
 <li>
 <code>-t &lt;password&gt; | --to &lt;password&gt;</code> stop at given password (in dictionary attack this is a end line number)</li>
 <li>`-pps  | --passwords-per-second  Will try the given number of passwords per second (Since 1.1)</li>
+<li>`-w      | --wordlist  path to wordlist file (example: /../../wordlist.txt)</li>
 </ul><p>You can use <code>--from</code> and <code>--to</code> to parallelize the brute force on several computers.</p>
 
 <blockquote>
