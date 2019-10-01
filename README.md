@@ -22,8 +22,8 @@ These are the available options for AKR:
 * `-l <length>   | --min-length <length>` start at given length
 * `-f <password> | --from <password>` start at given password (in dictionary attack this is a start line number)
 * `-t <password> | --to <password>` stop at given password (in dictionary attack this is a end line number)
-* `-pps <number> | --passwords-per-second <number> Will try the given number of passwords per second (Since 1.1)
-* `-w <path>     | --wordlist <path> path to wordlist file (example: /../../wordlist.txt)
+* `-pps <number> | --passwords-per-second <number>` Will try the given number of passwords per second (Since 1.1)
+* `-w <path>     | --wordlist <path>` path to wordlist file (example: /../../wordlist.txt)
 
 You can use `--from` and `--to` to parallelize the brute force on several computers.
 
@@ -31,9 +31,9 @@ You can use `--from` and `--to` to parallelize the brute force on several comput
 
 ### Character set options &mdash; since 1.1
 
-* `-lo         | --letters-onlỳ use letters only
-* `-no         | --numbers-onlỳ use numbers only
-* `-uc         | --upper-casè discards lower-case letters
+* `-lo         | --letters-only` use letters only
+* `-no         | --numbers-only` use numbers only
+* `-uc         | --upper-case` discards lower-case letters
 * `-lc         | --lower-case` discards upper-case letters
 * `-ec <chars> | --extra-characters <chars>` add specified characters in combinations
 
